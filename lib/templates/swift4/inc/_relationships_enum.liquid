@@ -11,7 +11,11 @@
         {%- endif -%}
 			{%- endcapture -%}
       {%- assign relationship_name = relationship_name %}
-    case {{ relationship_name | uncapitalize }} = "{{ relationship_name | escape_quotes }}"
+      {%- if relationship_name | uncapitalize == relationship_name | escape_quotes %}
+      case {{ relationship_name | uncapitalize }}
+            {%- else -%}
+      case {{ relationship_name | uncapitalize }} = "{{ relationship_name | escape_quotes }}"
+      {% endif -%}
     {%- endfor %}
   }
 {% endif -%}

@@ -6,7 +6,11 @@
             {%- if attribute.comment.size > 0 %}
     /** {{ attribute.comment }} **/
             {%- endif %}
+                {%- if attribute.name == attribute.name | escape_quotes %}
+    case {{ attribute.name }}
+                {%- else -%}
     case {{ attribute.name }} = "{{ attribute.name | escape_quotes }}"
+                {% endif-%}
         {%- endif %}
     {%- endfor %}
   }
